@@ -23,19 +23,20 @@
 
     <br><br><br>
     <div id="Eleccion">
-      <button type="button" onclick="print(Yes)">Aceptado</button>
+      <button type="button" id="button1" onclick="print(Yes)">Aceptado</button>
       <br>
-      <button type="button" onclick="print(Maybe)">Quizás</button>
+      <button type="button" id="button2" onclick="print(Maybe)">Quizás</button>
       <br>
-      <button type="button" onclick="print(Refused)">Rechazado</button>
+      <button type="button" id="button3" onclick="print(Refused)">Rechazado</button>
     </div>
+    
     <!-- build:js scripts/popup-vendor.js -->
     <!-- bower:js -->
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js scripts/popup.js -->
-    <script src="scripts/popup.js"></script>
+    <script src="scripts.babel/popup.js"></script>
     <!-- endbuild -->
   </body>
 </html>
