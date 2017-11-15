@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- build:css styles/popup-vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css styles/main.css -->
+    <link href="styles/main.css" rel="stylesheet">
+    <!-- endbuild -->
+  </head>
+  <body>
+    <h1>TalentoLearning</h1>
+
+    <select id="SelectorPuesto">
+      <option value="Front End Developer">Front End Developer</option>
+      <option value="Back End Developer">Back End Developer</option>
+      <option value="DevOps">DevOps</option>
+      <option value="Data Scientist">Data Scientists</option>
+      <option value="Agile Coach">Agile Coach</option>
+    </select>
+
+    <br><br><br>
+    <div id="Eleccion">
+      <button type="button" onclick="print(Yes)">Aceptado</button>
+      <br>
+      <button type="button" onclick="print(Maybe)">Quizás</button>
+      <br>
+      <button type="button" onclick="print(Refused)">Rechazado</button>
+    </div>
+    <!-- build:js scripts/popup-vendor.js -->
+    <!-- bower:js -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js scripts/popup.js -->
+    <script src="scripts/popup.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>
