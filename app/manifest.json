@@ -14,7 +14,11 @@
       "scripts.babel/background.js"
     ]
   },
-  "permissions": [],
+  "content_scripts": [{
+    "matches": ["*://*.stackoverflow.com/*"],
+    "js": ["content.js"]
+  }],
+  "permissions": ["activeTab"],
   "browser_action": {
     "default_icon": {
       "19": "images/icon-19.png",

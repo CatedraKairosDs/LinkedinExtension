@@ -29,10 +29,32 @@
       <br>
       <button id="refuse" type="button">Rechazado</button>
     </div>
+    <br>
     <!-- build:js scripts/popup-vendor.js -->
     <!-- bower:js -->
     <!-- endbower -->
     <!-- endbuild -->
+    <div id="formAccept" style="display: none">
+      <p id="Frase aceptar"></p>
+      <br>
+      <button id="AceptarAceptar">Aceptar</button>
+      <button id="CancelarAceptar">Cancelar</button>
+    </div>
+
+    <div id="formMaybe" style="display: none">
+        <p id="Frase quizas"></p>
+        <br>
+        <button id="AceptarQuizas">Aceptar</button>
+        <button id="CancelarQuizas">Cancelar</button>
+    </div>
+
+    <div id="formCancel" style="display: none">
+        <p id="Frase cancelar"></p>
+        <p>¿Por qué?</p>
+        <input id="RazonRechazo" type="text" value="">
+        <button id="AceptarCancelar">Aceptar</button>
+        <button id="CancelarCancelar">Cancelar</button>
+    </div>
 
     <!-- build:js scripts/popup.js -->
     <script src="scripts.babel/popup.js"></script>
