@@ -27,39 +27,40 @@
 
     <br><br>
     <div id="Eleccion">
-        <button id="accept" type="button" >Aceptado </button>
-      <button id="maybe" type="button">Quizás</button>
-      <button id="refuse" type="button">Rechazado</button>
+      <button id="accept" class="boton" type="button" >Aceptado </button>
+      <button id="maybe" class="boton" type="button">Quizás</button>
+      <button id="refuse" class="boton" type="button">Rechazado</button>
     </div>
-    <br>
 
+    <br>
     <!-- build:js scripts/popup-vendor.js -->
     <!-- bower:js -->
     <!-- endbower -->
     <!-- endbuild -->
     <div id="formAccept" style="display: none">
       <p id="Frase aceptar"></p>
-      <br>
-      <button id="AceptarAceptar">Aceptar</button>
-      <button id="CancelarAceptar">Cancelar</button>
+      <button class="boton" id="AceptarAceptar">Aceptar</button>
+      <button class="boton" id="CancelarAceptar">Cancelar</button>
     </div>
 
     <div id="formMaybe" style="display: none">
         <p id="Frase quizas"></p>
-        <br>
-        <button id="AceptarQuizas">Aceptar</button>
-        <button id="CancelarQuizas">Cancelar</button>
+        <button class="bototn" id="AceptarQuizas">Aceptar</button>
+        <button class="bototn" id="CancelarQuizas">Cancelar</button>
     </div>
 
     <div id="formCancel" style="display: none">
         <p id="Frase cancelar"></p>
         <p>¿Por qué?</p>
-        <input id="RazonRechazo" type="text" value="">
-        <button id="AceptarCancelar">Aceptar</button>
-        <button id="CancelarCancelar">Cancelar</button>
+        <input id="RazonRechazo" style="border-radius: 5px" type="text" value="">
+        <br><br>
+        <button class="boton" id="AceptarCancelar">Aceptar</button>
+        <button class="boton" id="CancelarCancelar">Cancelar</button>
     </div>
 
     <!-- build:js scripts/popup.js -->
+
+    <script src="scripts.babel/background.js"></script>
     <script src="scripts.babel/popup.js"></script>
     <!-- endbuild -->
   </body>
