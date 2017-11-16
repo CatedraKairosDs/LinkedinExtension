@@ -16,8 +16,8 @@
   },
   "content_scripts": [{
     "__comment": "matches should be using linkedin: *://*.linkedin.com/*",
-    "matches": ["file://*"],
-    "js": ["script.label/content.js"]
+    "matches": ["<all_urls>"],
+    "js": ["styles/js/Query.js","scripts.babel/content.js"]
   }],
   "permissions": ["activeTab"],
   "browser_action": {
