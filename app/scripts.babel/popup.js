@@ -29,7 +29,11 @@ var puesto = selectorPuesto.options[selectorPuesto.selectedIndex].text;
 selectorPuesto.addEventListener('change', function(event){
   console.log("Ha cambiado");
   puesto = selectorPuesto.options[selectorPuesto.selectedIndex].text;
-  console.log("Dentro: " + puesto)
+  console.log("Dentro: " + puesto);
+  formAccept.style="display: none";
+  formMaybe.style="display: none";
+  formCancel.style="display: none";
+
 });
 
 //Listener del boton aceptar para sacar el formulario de aceptar

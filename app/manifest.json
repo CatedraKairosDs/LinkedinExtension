@@ -15,8 +15,9 @@
     ]
   },
   "content_scripts": [{
-    "matches": ["*://*.stackoverflow.com/*"],
-    "js": ["content.js"]
+    "__comment": "matches should be using linkedin: *://*.linkedin.com/*",
+    "matches": ["file://*"],
+    "js": ["script.label/content.js"]
   }],
   "permissions": ["activeTab"],
   "browser_action": {
