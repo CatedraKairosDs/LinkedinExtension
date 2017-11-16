@@ -8,6 +8,10 @@
     <!-- endbuild -->
     <!-- build:css styles/main.css -->
     <link href="styles/main.css" rel="stylesheet">
+    <link href="styles/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="styles/js/bootstrap.min.js"></script>
     <!-- endbuild -->
   </head>
   <body>
@@ -23,19 +27,28 @@
 
     <br><br><br>
     <div id="Eleccion">
-      <button id="accept" type="button">Aceptado</button>
+      <button id="accept" type="button" >Aceptado </button>
       <br>
       <button id="maybe" type="button">Quizás</button>
       <br>
       <button id="refuse" type="button">Rechazado</button>
     </div>
+
+    <div id="confirmacion" style="display:none;">
+      <p>¿Quiere confirmar su eleccion?</p>
+      <div class="input-group">
+        <button id="acept">Aceptar</button>
+        <button id="cancel">Cancelar</button>
+      </div>
+    </div>
+    <p id="resultado"></p>
     <!-- build:js scripts/popup-vendor.js -->
     <!-- bower:js -->
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js scripts/popup.js -->
-    <script src="scripts.babel/popup.js"></script>
+
     <script src="scripts.babel/background.js"></script>
     <!-- endbuild -->
   </body>
