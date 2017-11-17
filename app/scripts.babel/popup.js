@@ -2,6 +2,9 @@
 
 console.log('\'Allo \'Allo! Popup');
 
+
+
+
 var selectorPuesto = document.getElementById("SelectorPuesto");
 //Botones generales
 var acceptButton = document.getElementById("accept");
@@ -49,6 +52,7 @@ acceptButton.addEventListener('click', function(event){
   //Listeners del formulario de acepar
   acceptAceptarButton.addEventListener('click', function() {
     formAccept.style="display: none";
+    console.log("Manda Mensaje");
   });
 
   cancelAceptarButton.addEventListener('click', function() {
@@ -99,5 +103,6 @@ refuseButton.addEventListener('click', function(event){
   });
 
 });
+
 
 

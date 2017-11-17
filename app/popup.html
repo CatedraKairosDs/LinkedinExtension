@@ -39,13 +39,13 @@
     <!-- endbuild -->
     <div id="formAccept" style="display: none">
       <p id="Frase aceptar"></p>
-      <button class="boton" id="AceptarAceptar">Aceptar</button>
+      <button class="boton1" id="AceptarAceptar">Aceptar</button>
       <button class="boton" id="CancelarAceptar">Cancelar</button>
     </div>
 
     <div id="formMaybe" style="display: none">
         <p id="Frase quizas"></p>
-        <button class="boton" id="AceptarQuizas">Aceptar</button>
+        <button class="boton1" id="AceptarQuizas">Aceptar</button>
         <button class="boton" id="CancelarQuizas">Cancelar</button>
     </div>
 
@@ -54,15 +54,15 @@
         <p>¿Por qué?</p>
         <input id="RazonRechazo" style="border-radius: 5px" type="text" value="">
         <br><br>
-        <button class="boton" id="AceptarCancelar">Aceptar</button>
+        <button class="boton1" id="AceptarCancelar">Aceptar</button>
         <button class="boton" id="CancelarCancelar">Cancelar</button>
     </div>
 
     <!-- build:js scripts/popup.js -->
-
+    <script src="scripts.babel/content.js"></script>
     <script src="scripts.babel/background.js"></script>
     <script src="scripts.babel/popup.js"></script>
-    <script src="scripts.babel/content.js"></script>
+
     <!-- endbuild -->
   </body>
 </html>
