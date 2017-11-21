@@ -16,6 +16,12 @@
       "scripts.babel/background.js"
     ]
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["scripts.babel/content.js"]
+    }
+  ],
   "permissions": [
     "activeTab",
     "storage",

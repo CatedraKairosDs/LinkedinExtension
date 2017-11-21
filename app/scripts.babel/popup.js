@@ -52,7 +52,7 @@ acceptButton.addEventListener('click', function(event){
   //Listeners del formulario de acepar
   acceptAceptarButton.addEventListener('click', function() {
     formAccept.style="display: none";
-    console.log("Manda Mensaje");
+    console.log("Popup: Manda Mensaje");
   });
 
   cancelAceptarButton.addEventListener('click', function() {

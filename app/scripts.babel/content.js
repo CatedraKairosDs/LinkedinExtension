@@ -1,9 +1,16 @@
-chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+/*chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     // If the received message has the expected format...
-    if (msg.text === 'report_back') {
+    if (request.all === 'yes') {
         // Call the specified callback, passing
         // the web-page's DOM content as argument
-        sendResponse(document.all[0].outerHTML);
-        console.log("Envía mensaje");
+        sendResponse(document.body);
+        console.log("Content: Envía mensaje");
     }
 });
+*/
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        console.log(document.getElementById("voyager-feed"));
+        sendResponse(document.getElementById("voyager-feed").innerHTML);
+    });
+  
