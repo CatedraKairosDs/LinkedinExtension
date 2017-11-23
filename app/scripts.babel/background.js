@@ -4,7 +4,7 @@ chrome.runtime.onInstalled.addListener(details => {
   console.log('previousVersion', details.previousVersion);
 });
 
-chrome.browserAction.setBadgeText({text: '\'Allo'});
+chrome.browserAction.setBadgeText({text: '\E'});
 
 //console.log('\'Allo \'Allo! Event Page for Browser Action');
 
@@ -40,10 +40,4 @@ function click(e) {
       
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  var botons = document.querySelectorAll('.boton1');
-  for (var i = 0; i < botons.length; i++) {
-    botons[i].addEventListener('click', click);
-  }
-});
 

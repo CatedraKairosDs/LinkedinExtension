@@ -1,14 +1,14 @@
 {
   "manifest_version": 2,
 
-  "name": "Getting started example",
+  "name": "Linkedin Extension",
   "description": "This extension allows the user to change the background color of the current page.",
   "version": "1.0",
 
   "browser_action": {
-    "default_icon": "images/icon-16.png",
+    "default_icon": "images/linkedin.png",
     "default_popup": "popup.html",
-    "default_title": "Click here!"
+    "default_title": "Linkedin Classifier!"
   },
   "default_locale": "en",
   "background": {
