@@ -17,9 +17,21 @@ chrome.runtime.onMessage.addListener(
     });
  
 */
-document.addEventListener('DOMContentLoaded', function () {
-    var botons = document.querySelectorAll('.boton1');
-    for (var i = 0; i < botons.length; i++) {
-      botons[i].addEventListener('click', click);
-    }
-  });
+
+
+
+chrome.runtime.onMessage.addListener(
+    
+    function(request, sender, sendResponse) {
+        if (request.method == "getinfo")
+            sendResponse({respuesta: getData()});
+});
+  
+  function getData() {
+      var name = document.getElementsByClassName("pv-top-card-section__name Sans-26px-black-85%")[0].innerHTML;
+      var localizacion= document.getElementsByClassName("pv-top-card-section__location Sans-17px-black-70% mb1 inline-block")[0].innerHTML;
+      var datos= [];
+      datos.push(name, localizacion)
+      return datos;
+  }
+  

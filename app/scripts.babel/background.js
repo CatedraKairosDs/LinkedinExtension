@@ -24,20 +24,19 @@ chrome.browserAction.setBadgeText({text: '\E'});
 //  console.log('I received the following DOM content:\n' + domContent);
 //}
 */
-var respuesta;
-function click(e) {
-  console.log("Se pulsa!!")
-  chrome.tabs.executeScript(null,
-      {
-          code: "document.body.style.backgroundColor='red'" //; console.log(document);"
-      });
+
+function clicked(e) {
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, {senAll: "yes"}, function handler(response) {
-      respuesta = response;
-      console.log(response);
+    chrome.tabs.sendMessage(tabs[0].id, {method: "getinfo"}, function(response) {
+      console.log(response.respuesta);
     });
   });
-      
+          
 }
 
-
+document.addEventListener('DOMContentLoaded', function () {
+  var botons = document.querySelectorAll('.boton1');
+  for (var i = 0; i < botons.length; i++) {
+    botons[i].addEventListener('click', clicked);
+  }
+});
