@@ -1,6 +1,6 @@
 'use strict';
 
-console.log('\'ln \'ln! Popup');
+console.log('\Bienvenido al classificador de Linkedin');
 
 
 
@@ -25,6 +25,8 @@ var formMaybe = document.getElementById("formMaybe");
 var formCancel = document.getElementById("formCancel");
 var razon;
 
+var resultado= document.getElementById("resultado");
+
 //Puesto seleccionado en el selector
 var puesto = selectorPuesto.options[selectorPuesto.selectedIndex].text;
 
@@ -36,6 +38,7 @@ selectorPuesto.addEventListener('change', function(event){
   formAccept.style="display: none";
   formMaybe.style="display: none";
   formCancel.style="display: none";
+  resultado.style="display: none";
 
 });
 
@@ -48,15 +51,16 @@ acceptButton.addEventListener('click', function(event){
   frase.innerHTML = "Estás aceptando un perfil de "+puesto.bold();
   acceptAceptarButton = document.getElementById("AceptarAceptar");
   cancelAceptarButton = document.getElementById("CancelarAceptar");
-
+  resultado.style="display: none";
   //Listeners del formulario de acepar
   acceptAceptarButton.addEventListener('click', function() {
     formAccept.style="display: none";
-    console.log("Popup: Manda Mensaje");
+    //console.log("Popup: Manda Mensaje");
   });
 
   cancelAceptarButton.addEventListener('click', function() {
     formAccept.style="display: none";
+    resultado.style="display: none";
   });
 });
 
@@ -69,7 +73,7 @@ maybeButton.addEventListener('click', function(event){
   frase.innerHTML = 'Estás "metiendo en la nevera" un perfil de '+puesto.bold();
   acceptQuizasButton = document.getElementById("AceptarQuizas");
   cancelQuizasButton = document.getElementById("CancelarQuizas");
-
+  resultado.style="display: none";
   //Listeners del formulario de quizas
   acceptQuizasButton.addEventListener('click', function() {
     formMaybe.style="display: none";
@@ -77,6 +81,7 @@ maybeButton.addEventListener('click', function(event){
 
   cancelQuizasButton.addEventListener('click', function() {
     formMaybe.style="display: none";
+    resultado.style="display: none";
   });
 });
 
@@ -89,7 +94,7 @@ refuseButton.addEventListener('click', function(event){
   frase.innerHTML = "Estás rechazando un perfil de "+puesto.bold();
   acceptCancelarButton = document.getElementById("AceptarCancelar");
   cancelCancelarButton = document.getElementById("CancelarCancelar");
-
+  resultado.style="display: none";
   //Listeners del formulario de cancelar
   acceptCancelarButton.addEventListener('click', function() {
     razon = document.getElementById("RazonRechazo").value;
@@ -100,6 +105,7 @@ refuseButton.addEventListener('click', function(event){
   cancelCancelarButton.addEventListener('click', function() {
     document.getElementById("RazonRechazo").value = "";
     formCancel.style="display: none";
+    resultado.style="display: none";
   });
 
 });
