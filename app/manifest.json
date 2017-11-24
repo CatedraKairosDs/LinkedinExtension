@@ -12,14 +12,12 @@
   },
   "default_locale": "en",
   "background": {
-    "scripts": [
-      "scripts.babel/background.js"
-    ]
+    "scripts": ["styles/js/jquery-3.2.1.min.js","scripts.babel/background.js"]
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["scripts.babel/content.js"]
+      "js": ["styles/js/jquery-3.2.1.min.js","scripts.babel/content.js"]
     }
   ],
   "permissions": [

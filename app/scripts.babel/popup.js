@@ -8,6 +8,7 @@ console.log('\Bienvenido al classificador de Linkedin');
 var selectorPuesto = document.getElementById("SelectorPuesto");
 //Botones generales
 var acceptButton = document.getElementById("accept");
+//var acceptButton =$("#test");
 var maybeButton = document.getElementById("maybe");
 var refuseButton = document.getElementById("refuse");
 //Botones del formulario de aceptar
@@ -43,7 +44,7 @@ selectorPuesto.addEventListener('change', function(event){
 });
 
 //Listener del boton aceptar para sacar el formulario de aceptar
-acceptButton.addEventListener('click', function(event){
+acceptButton.addEventListener('click',function(){
   formAccept.style="display: block";
   formMaybe.style="display: none";
   formCancel.style="display: none";
