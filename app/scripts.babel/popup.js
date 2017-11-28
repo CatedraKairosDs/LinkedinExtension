@@ -1,9 +1,6 @@
 'use strict';
 
-console.log('\'Allo \'Allo! Popup');
-
-
-
+console.log('\Bienvenido al clasificador de Linkedin');
 
 var selectorPuesto = document.getElementById("SelectorPuesto");
 //Botones generales
@@ -40,7 +37,7 @@ selectorPuesto.addEventListener('change', function(event){
 });
 
 //Listener del boton aceptar para sacar el formulario de aceptar
-acceptButton.addEventListener('click', function(event){
+acceptButton.addEventListener('click', function(){
   formAccept.style="display: block";
   formMaybe.style="display: none";
   formCancel.style="display: none";
@@ -69,7 +66,6 @@ maybeButton.addEventListener('click', function(event){
   frase.innerHTML = 'Estás "metiendo en la nevera" un perfil de '+puesto.bold();
   acceptQuizasButton = document.getElementById("AceptarQuizas");
   cancelQuizasButton = document.getElementById("CancelarQuizas");
-
   //Listeners del formulario de quizas
   acceptQuizasButton.addEventListener('click', function() {
     formMaybe.style="display: none";
@@ -89,7 +85,6 @@ refuseButton.addEventListener('click', function(event){
   frase.innerHTML = "Estás rechazando un perfil de "+puesto.bold();
   acceptCancelarButton = document.getElementById("AceptarCancelar");
   cancelCancelarButton = document.getElementById("CancelarCancelar");
-
   //Listeners del formulario de cancelar
   acceptCancelarButton.addEventListener('click', function() {
     razon = document.getElementById("RazonRechazo").value;
