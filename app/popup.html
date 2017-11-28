@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- build:css styles/popup-vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css styles/main.css -->
+    <link href="styles/main.css" rel="stylesheet">
+    <link href="styles/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="styles/js/bootstrap.min.js"></script>
+    <!-- endbuild -->
+  </head>
+  <body>
+    <h1>TalentoLearning</h1>
+
+    <select id="SelectorPuesto">
+      <option>Enterprise Architect</option>
+      <option>Arquitecto de Software</option>
+      <option>Arquitecto de Sistemas</option>
+      <option>Front-End</option>
+      <option>Back-End</option>
+      <option>DevOps Engineer</option>
+      <option>Mobile (iOS/Android) Engineer</option>
+      <option>Tester/QA Analyst</option>
+      <option>Data Architect</option>
+      <option>Data Scientist</option>
+      <option>Ingeniero QA</option>
+      <option>Arquitecto de Big Data</option>
+      <option>Ingeniero de Big Data</option>
+      <option>Experto IOT</option>
+      <option>Arquitecto Cloud</option>
+      <option>Maquetador</option>
+      <option>UX Designer</option>
+    </select>
+
+    <br><br>
+    <div id="Eleccion">
+      <button id="accept" class="boton" type="button" >Aceptado </button>
+      <button id="maybe" class="boton" type="button">Quizás</button>
+      <button id="refuse" class="boton" type="button">Rechazado</button>
+    </div>
+
+    <br>
+    <!-- build:js scripts/popup-vendor.js -->
+    <!-- bower:js -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <div id="formAccept" style="display: none">
+      <p id="Frase aceptar"></p>
+      <button class="boton1" id="AceptarAceptar">Aceptar</button>
+      <button class="boton" id="CancelarAceptar">Cancelar</button>
+    </div>
+
+    <div id="formMaybe" style="display: none">
+        <p id="Frase quizas"></p>
+        <button class="boton1" id="AceptarQuizas">Aceptar</button>
+        <button class="boton" id="CancelarQuizas">Cancelar</button>
+    </div>
+
+    <div id="formCancel" style="display: none">
+        <p id="Frase cancelar"></p>
+        <p>¿Por qué?</p>
+        <input id="RazonRechazo" style="border-radius: 5px" type="text" value="">
+        <br><br>
+        <button class="boton1" id="AceptarCancelar">Aceptar</button>
+        <button class="boton" id="CancelarCancelar">Cancelar</button>
+    </div>
+
+    <!-- build:js scripts/popup.js -->
+    <script src="scripts.babel/content.js"></script>
+    <script src="scripts.babel/background.js"></script>
+    <script src="scripts.babel/popup.js"></script>
+
+    <!-- endbuild -->
+  </body>
+</html>
