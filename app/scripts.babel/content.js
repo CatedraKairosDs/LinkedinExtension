@@ -10,6 +10,12 @@
 */
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
+        let a = document.createElement('a');
+        a.href = '';
+        if (a.href.indexOf('linkedin.com') == -1) {
+            sendResponse(null);
+            return;
+        }
         //General
         var name = document.getElementsByClassName('profile-info')[0].childNodes[0].innerHTML;
         var extract = "";
