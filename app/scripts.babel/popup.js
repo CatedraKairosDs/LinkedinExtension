@@ -1,6 +1,6 @@
 'use strict';
 
-console.log('\Bienvenido al clasificador de Linkedin');
+console.log('Bienvenido al clasificador de Linkedin');
 
 var selectorPuesto = document.getElementById("SelectorPuesto");
 //Botones generales
@@ -20,7 +20,6 @@ var cancelCancelarButton;
 var formAccept = document.getElementById("formAccept");
 var formMaybe = document.getElementById("formMaybe");
 var formCancel = document.getElementById("formCancel");
-var razon;
 
 //Puesto seleccionado en el selector
 var puesto = selectorPuesto.options[selectorPuesto.selectedIndex].text;
@@ -49,10 +48,10 @@ acceptButton.addEventListener('click', function(){
   //Listeners del formulario de acepar
   acceptAceptarButton.addEventListener('click', function() {
     formAccept.style="display: none";
-    console.log("Popup: Manda Mensaje");
   });
 
   cancelAceptarButton.addEventListener('click', function() {
+    document.getElementById("RazonAceptado").value = "";
     formAccept.style="display: none";
   });
 });
@@ -72,6 +71,7 @@ maybeButton.addEventListener('click', function(event){
   });
 
   cancelQuizasButton.addEventListener('click', function() {
+    document.getElementById("RazonNevera").value = "";
     formMaybe.style="display: none";
   });
 });
@@ -87,8 +87,6 @@ refuseButton.addEventListener('click', function(event){
   cancelCancelarButton = document.getElementById("CancelarCancelar");
   //Listeners del formulario de cancelar
   acceptCancelarButton.addEventListener('click', function() {
-    razon = document.getElementById("RazonRechazo").value;
-    document.getElementById("RazonRechazo").value = "";
     formCancel.style="display: none";
   });
 

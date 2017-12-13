@@ -31,7 +31,7 @@
       <option>Ingeniero QA</option>
       <option>Arquitecto de Big Data</option>
       <option>Ingeniero de Big Data</option>
-      <option>Experto IOT</option>
+      <option>Experto IoT</option>
       <option>Arquitecto Cloud</option>
       <option>Maquetador</option>
       <option>UX Designer</option>
@@ -39,9 +39,9 @@
 
     <br><br>
     <div id="Eleccion">
-      <button id="accept" class="boton" type="button" >Aceptado </button>
-      <button id="maybe" class="boton" type="button">Quizás</button>
-      <button id="refuse" class="boton" type="button">Rechazado</button>
+      <button id="accept" class="botonMain" type="button" >Aceptado </button>
+      <button id="maybe" class="botonMain" type="button">Quizás</button>
+      <button id="refuse" class="botonMain" type="button">Rechazado</button>
     </div>
 
     <br>
@@ -51,13 +51,19 @@
     <!-- endbuild -->
     <div id="formAccept" style="display: none">
       <p id="Frase aceptar"></p>
-      <button class="boton1" id="AceptarAceptar">Aceptar</button>
+      <p>¿Por qué?</p>
+      <input id="RazonAceptado" style="border-radius: 5px" type="text" value="">
+      <br><br>
+      <button class="boton" id="AceptarAceptar">Aceptar</button>
       <button class="boton" id="CancelarAceptar">Cancelar</button>
     </div>
 
     <div id="formMaybe" style="display: none">
         <p id="Frase quizas"></p>
-        <button class="boton1" id="AceptarQuizas">Aceptar</button>
+        <p>¿Por qué?</p>
+        <input id="RazonNevera" style="border-radius: 5px" type="text" value="">
+        <br><br>
+        <button class="boton" id="AceptarQuizas">Aceptar</button>
         <button class="boton" id="CancelarQuizas">Cancelar</button>
     </div>
 
@@ -66,7 +72,7 @@
         <p>¿Por qué?</p>
         <input id="RazonRechazo" style="border-radius: 5px" type="text" value="">
         <br><br>
-        <button class="boton1" id="AceptarCancelar">Aceptar</button>
+        <button class="boton" id="AceptarCancelar">Aceptar</button>
         <button class="boton" id="CancelarCancelar">Cancelar</button>
     </div>
 
