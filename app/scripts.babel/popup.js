@@ -2,31 +2,34 @@
 (()=>{
   console.log('Bienvenido al clasificador de Linkedin');
 
-  var selectorPuesto = document.getElementById("SelectorPuesto");
-  var sentence = document.getElementById("sentence");
+  var selectorPuesto = document.getElementById('SelectorPuesto');
+  var sentence = document.getElementById('sentence');
   var msgs = document.getElementById('msgs');
-  var reason = document.getElementById("reason");
+  var reason = document.getElementById('reason');
 
   //Botones generales
-  var radioButtons = $("#election input[name=options]");
-  var accpetButton = document.getElementById("accept");
-  var cancelButton = document.getElementById("cancel");
+  var radioButtons = $('#election input[name=options]');
+  var accpetButton = document.getElementById('accept');
+  var cancelButton = document.getElementById('cancel');
   //Formularios
-  var step1 = document.getElementById("step1");
-  var step2 = document.getElementById("step2");
+  var step1 = document.getElementById('step1');
+  var step2 = document.getElementById('step2');
 
   var locale = {
-    'accept': 'Aceptar',
-    'maybe': 'Quizá',
-    'refuse': 'Rechazar'
+    accept: 'Aceptar',
+    maybe: 'Quizá',
+    refuse: 'Rechazar'
   };
 
 
   function resetForm() {
-    sentence.innerHTML = "Perfil";
+    sentence.innerHTML = 'Perfil';
+    var election = $('#election input[name=options]:checked');
+    election.prop('checked',false);
+    election.parent().removeClass('active');
     step1.removeAttribute('hidden');
     step2.setAttribute('hidden', '');
-    reason.value = "";
+    reason.value = '';
   }
 
   function showMessage(msg, type) {
@@ -57,22 +60,22 @@
   });
 
   function sendData(label, puesto, url) {
-    console.log("Se pulsa!!")
+    console.log('Se pulsa!!')
     var comentario = document.querySelector('#reason').value;
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {sendAll: "yes"}, function handler(response) {
+      chrome.tabs.sendMessage(tabs[0].id, {sendAll: 'yes'}, function handler(response) {
         if (response) {
           var data = new FormData();
           //console.log(response);
           response.label = String(label);
           response.puesto = String(puesto);
           response.comment = String(comentario);
-          data.set("json", JSON.stringify(response));
+          data.set('json', JSON.stringify(response));
           //console.log(data);
           //console.log(data.get('json'));
           fetch(url, {
             method: 'POST',
-            headers: {"Content-Type" : "application/json"},
+            headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify(response)
           }).then(function(r){
             showMessage('Perfil guardado correctamente', 'success');
@@ -88,11 +91,11 @@
   }
   
   $('#accept').click(()  => {
-    var puesto = $('#SelectorPuesto').value;
+    var puesto = selectorPuesto.value;
     var election = $('#election input[name=options]:checked').val();
-    console.log("Se pulsa en " + election);
+    console.log('Se pulsa en ' + election);
     //Las url no son definitivas
-    sendData(election, puesto, "https://34.248.142.102/api-linkedin/v1/profiles");
+    sendData(election, puesto, 'https://34.248.142.102/api-linkedin/v1/profiles');
   });
   
 })();
