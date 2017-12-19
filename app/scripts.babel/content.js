@@ -10,13 +10,19 @@
 */
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
+        let a = document.createElement('a');
+        a.href = '';
+        if (a.href.indexOf('linkedin.com') == -1) {
+            sendResponse(null);
+            return;
+        }
         //General
         var name = document.getElementsByClassName('profile-info')[0].childNodes[0].innerHTML;
-        var extract = "";
+        var extract = '';
         if (document.getElementById('profile-summary')) {
             extract = document.getElementById('profile-summary').childNodes[1].innerHTML;
         }
-        console.log("Nombre: ", name);
+        console.log('Nombre: ', name);
         //Experiencia
         var jsonExperience = [];
         if (document.getElementById('profile-experience')) {
@@ -26,45 +32,45 @@ chrome.runtime.onMessage.addListener(
                 var puestoName = childAux.childNodes[0].childNodes[0].innerHTML;
                 var cmpny = childAux.childNodes[1].childNodes[0].innerHTML;
                 var cuando = childAux.childNodes[2].childNodes[0].nodeValue;
-                var description = "";
-                var cuanto = "";
-                var donde = "";
+                var description = '';
+                var cuanto = '';
+                var donde = '';
                 if ((experienceAll[i].childNodes[1]) && (experienceAll[i].childNodes.length > 2)){
-                    if (experienceAll[i].childNodes[1].target != "_blank") {
+                    if (experienceAll[i].childNodes[1].target != '_blank') {
                         description = experienceAll[i].childNodes[1].innerHTML;
                     } else {
                         description = experienceAll[i].childNodes[2].innerHTML;
                     }
                 } else {
-                    description = "";
+                    description = '';
                 }
                 if (childAux.childNodes[2].childNodes[2]) {
                     donde = childAux.childNodes[2].childNodes[2].innerHTML;
                     if (childAux.childNodes[2].childNodes[1]){
                         cuanto = childAux.childNodes[2].childNodes[1].innerHTML;
                     } else {
-                        cuanto = "";
+                        cuanto = '';
                     }
                 } else {
-                    donde = "";
+                    donde = '';
                     if (childAux.childNodes[2].childNodes[1]){
                         cuanto = childAux.childNodes[2].childNodes[1].innerHTML;
                     } else {
-                        cuanto = "";
+                        cuanto = '';
                     }
                 }
                 var jsonPuesto = {
-                    "jobName": puestoName,
-                    "jobDescription": description,
-                    "company": cmpny,
-                    "when": cuando,
-                    "howMuch": cuanto,
-                    "where": donde
+                    jobName: puestoName,
+                    jobDescription: description,
+                    company: cmpny,
+                    when: cuando,
+                    howMuch: cuanto,
+                    where: donde
                 };
                 jsonExperience.push(jsonPuesto);
             }
         } else {
-            jsonExperience = "";
+            jsonExperience = '';
         }
 
         //Idiomas
@@ -74,18 +80,18 @@ chrome.runtime.onMessage.addListener(
             for (var i = 0; i < idiomaAll.length; i++) {
                 var idioma = idiomaAll[i];
                 var lang = idioma.childNodes[0].innerHTML;
-                var level = "";
+                var level = '';
                 if (idioma.childNodes[1]) {
                     level = idioma.childNodes[1].innerHTML;
                 }
                 var jsonIdioma = {
-                    "lang": lang,
-                    "level": level
+                    lang: lang,
+                    level: level
                 };
                 jsonLanguages.push(jsonIdioma);
             }
         } else {
-            jsonLanguages = "";
+            jsonLanguages = '';
         }
 
         //Educación
@@ -98,13 +104,13 @@ chrome.runtime.onMessage.addListener(
                 var eduName = education.childNodes[1].innerHTML;
                 var eduWhen = education.childNodes[2].innerHTML;
                 var jsonEducation = {
-                    "university": uni,
-                    "eduName": eduName,
-                    "eduWhen": eduWhen
+                    university: uni,
+                    eduName: eduName,
+                    eduWhen: eduWhen
                 }
             }
         } else {
-            jsonEducations = "";
+            jsonEducations = '';
         }
 
         //Proyectos
@@ -115,23 +121,23 @@ chrome.runtime.onMessage.addListener(
                 var project = projects[i];
                 var projectName = project.childNodes[0].childNodes[0].innerHTML;
                 var projectTime = project.childNodes[0].childNodes[1].innerHTML;
-                if (project.childNodes[1].className == "description searchable") {
+                if (project.childNodes[1].className == 'description searchable') {
                     var description = project.childNodes[1].innerHTML;
                     var jsonProject = {
-                        "projectName": projectName,
-                        "projectTime": projectTime,
-                        "projectDescription": description
+                        projectName: projectName,
+                        projectTime: projectTime,
+                        projectDescription: description
                     };
                 } else {
                     var jsonProject = {
-                        "projectName": projectName,
-                        "projectTime": projectTime,
+                        projectName: projectName,
+                        projectTime: projectTime,
                     };
                 }
                 jsonProjects.push(jsonProject);
             }
         } else {
-            jsonProjects = "";
+            jsonProjects = '';
         }
         
 
@@ -141,7 +147,7 @@ chrome.runtime.onMessage.addListener(
         for (var i = 0; i < skillsAll.length; i++) {
             var skill = skillsAll[i].innerHTML;
             var jsonSkill = {
-                "skill": skill
+                skill: skill
             };
             jsonSkills.push(jsonSkill);
         }
@@ -156,21 +162,21 @@ chrome.runtime.onMessage.addListener(
                 var licenciaCert = certificado.childNodes[0].childNodes[1].innerHTML;
                 var whenCert = certificado.childNodes[0].childNodes[2].innerHTML;
                 var jsonCertificate = {
-                    "certName": certName,
-                    "certLicense": licenciaCert,
-                    "certWhen": whenCert
+                    certName: certName,
+                    certLicense: licenciaCert,
+                    certWhen: whenCert
                 };
                 jsonCertificates.push(jsonCertificate);
             }
         } else {
-            jsonCertificate = "";
+            jsonCertificate = '';
         }
         
 
         //Premios 
         var jsonAwards = [];
         if (document.getElementById('profile-honors')) {
-            var awards = document.getElementById("profile-honors").childNodes[1].childNodes[0].childNodes;
+            var awards = document.getElementById('profile-honors').childNodes[1].childNodes[0].childNodes;
             for (var i = 0; i < awards.length; i++) {
                 var award = awards[i];
                 var position = award.childNodes[0].childNodes[0].innerHTML;
@@ -178,15 +184,15 @@ chrome.runtime.onMessage.addListener(
                 var awardTime = award.childNodes[0].childNodes[2].innerHTML;
                 var awardDescription = award.childNodes[1].innerHTML;
                 var jsonAward = {
-                    "position": position,
-                    "orginisation": organisation,
-                    "whenAward": awardTime,
-                    "awardDescription": awardDescription
+                    position: position,
+                    orginisation: organisation,
+                    whenAward: awardTime,
+                    awardDescription: awardDescription
                 };
                 jsonAwards.push(jsonAward);
             }
         } else {
-            jsonAwards = "";
+            jsonAwards = '';
         }
         
 
@@ -200,15 +206,15 @@ chrome.runtime.onMessage.addListener(
                 var positionInOrg = organizacion.childNodes[0].childNodes[1].innerHTML;
                 var timeInOrg = organizacion.childNodes[0].childNodes[2].innerHTML;
                 var jsonOrg = {
-                    "orgName": orgName,
-                    "posInOrg": positionInOrg,
-                    "timeInOrg": timeInOrg
+                    orgName: orgName,
+                    posInOrg: positionInOrg,
+                    timeInOrg: timeInOrg
                 };
                 jsonOrgs.push(jsonOrg);
             }
 
         } else {
-            jsonOrgs = "";
+            jsonOrgs = '';
         }
 
         var jsonVolExps = [];
@@ -222,18 +228,18 @@ chrome.runtime.onMessage.addListener(
                 var orgExp = volunteerExperience.childNodes[0].childNodes[1].innerHTML;
                 var whenExp = volunteerExperience.childNodes[0].childNodes[2].childNodes[0].nodeValue;
                 var causeExp = volunteerExperience.childNodes[0].childNodes[2].childNodes[1].innerHTML;
-                var descrExp = ""
+                var descrExp = ''
                 if (volunteerExperience.childNodes[1].childNodes[0]) {
                     descrExp = volunteerExperience.childNodes[1].childNodes[0].nodeValue;
                 } else {
-                    descrExp = "";
+                    descrExp = '';
                 }
                 var jsonExp = {
-                    "nameExp": nameExp,
-                    "orgExp": orgExp,
-                    "whenExp": whenExp,
-                    "causeExp": causeExp,
-                    "descrExp": descrExp
+                    nameExp: nameExp,
+                    orgExp: orgExp,
+                    whenExp: whenExp,
+                    causeExp: causeExp,
+                    descrExp: descrExp
                 };
                 jsonVolExps.push(jsonExp);
             }
@@ -244,16 +250,16 @@ chrome.runtime.onMessage.addListener(
                 for (var i = 0; i < beneficCauses.length; i++) {
                     var beneficCause = beneficCauses[i].innerHTML;
                     var jsonBenefCause = {
-                        "beneficCause": beneficCause
+                        beneficCause: beneficCause
                     };
                     jsonBenefCauses.push(jsonBenefCause);
                 }
             } else {
-                jsonBenefCauses = "";
+                jsonBenefCauses = '';
             }
         } else {
-            jsonVolExps = "";
-            jsonBenefCauses = "";
+            jsonVolExps = '';
+            jsonBenefCauses = '';
         }
 
         //Recommendations
@@ -267,15 +273,15 @@ chrome.runtime.onMessage.addListener(
                 var whereWhoRec = recommendation.childNodes[1].childNodes[0].childNodes[1].childNodes[2].innerHTML;
                 var descrRec = recommendation.childNodes[1].childNodes[0].childNodes[1].childNodes[3].innerHTML;
                 var jsonRec = {
-                    "whoRecommended": whoRec,
-                    "positionOfRecomender": posWhoRec,
-                    "locationOfRecomender": whereWhoRec,
-                    "recommendation": descrRec
+                    whoRecommended: whoRec,
+                    positionOfRecomender: posWhoRec,
+                    locationOfRecomender: whereWhoRec,
+                    recommendation: descrRec
                 };
                 jsonRecs.push(jsonRec);
             }
         } else {
-            jsonRecs = "";
+            jsonRecs = '';
         }
 
         //Otra formación
@@ -283,19 +289,19 @@ chrome.runtime.onMessage.addListener(
         if (document.getElementById('profile-courses')) {
             var courses = document.getElementById('profile-courses').childNodes[1].childNodes;
             for (var i = 0; i < courses.length; i++) {
-                if (courses[i].tagName == "UL") {
+                if (courses[i].tagName == 'UL') {
                     var coursesAux = courses[i].childNodes;
                     for (var j = 0; j < coursesAux.length; j++) {
                         var course = coursesAux[j].innerText;
                         var jsonCourse = {
-                            "course": course
+                            course: course
                         }
                         jsonCourses.push(jsonCourse);
                     }
                 }
             }
         } else {
-            jsonCourses = "";
+            jsonCourses = '';
         }
 
         //Publicaciones de investigación
@@ -305,31 +311,31 @@ chrome.runtime.onMessage.addListener(
             for (var i = 0; i < publications.length; i++) {
                 var publication = publications[i].innerText;
                 var jsonPublication = {
-                    "publication": publication
+                    publication: publication
                 }
                 jsonPublications.push(jsonPublication);
             }
         } else {
-            jsonPublications = "";
+            jsonPublications = '';
         }
         
         
 
         var jsonProfile = {
-            "name": name,
-            "extract": extract,
-            "experience": jsonExperience,
-            "languages": jsonLanguages,
-            "projects": jsonProject,
-            "skills": jsonSkills,
-            "certificates": jsonCertificates,
-            "awards": jsonAwards,
-            "orgs": jsonOrgs,
-            "volExps": jsonVolExps,
-            "beneficCauses": jsonBenefCauses,
-            "recommendations": jsonRecs,
-            "courses": jsonCourses,
-            "publications": jsonPublications
+            name: name,
+            extract: extract,
+            experience: jsonExperience,
+            languages: jsonLanguages,
+            projects: jsonProject,
+            skills: jsonSkills,
+            certificates: jsonCertificates,
+            awards: jsonAwards,
+            orgs: jsonOrgs,
+            volExps: jsonVolExps,
+            beneficCauses: jsonBenefCauses,
+            recommendations: jsonRecs,
+            courses: jsonCourses,
+            publications: jsonPublications
         };
         //var profile = [name, actualJob, actualCompany, location, connections, experience, skills];
         sendResponse(jsonProfile);

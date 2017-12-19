@@ -5,80 +5,81 @@
     <!-- build:css styles/popup-vendor.css -->
     <!-- bower:css -->
     <!-- endbower -->
+    <link href="styles/css/bootstrap.min.css" rel="stylesheet">
     <!-- endbuild -->
     <!-- build:css styles/main.css -->
-    <link href="styles/main.css" rel="stylesheet">
-    <link href="styles/css/bootstrap.min.css" rel="stylesheet">
+    <!-- endbuild -->
+    <style>
+    body {
+      width: 600px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <header>
+          <h1 class="display-4">Talento Learning</h1>
+      </header>
+      <div id="pageContent" class="col-12 py-3">
+        <div id="msgs" hidden class="alert" role="alert"></div>
+        <div class="card">
+          <div id="sentence" class="card-header" role="tab">Perfil</div>
+          <div class="card-body" id="step1">
+            <div class="form-group">
+              <label for="SelectorPuesto">Tipo</label>
+              <select id="SelectorPuesto" class="form-control">
+                <option>Enterprise Architect</option>
+                <option>Arquitecto de Software</option>
+                <option>Arquitecto de Sistemas</option>
+                <option>Front-End</option>
+                <option>Back-End</option>
+                <option>DevOps Engineer</option>
+                <option>Mobile (iOS/Android) Engineer</option>
+                <option>Tester/QA Analyst</option>
+                <option>Data Architect</option>
+                <option>Data Scientist</option>
+                <option>Ingeniero QA</option>
+                <option>Arquitecto de Big Data</option>
+                <option>Ingeniero de Big Data</option>
+                <option>Experto IoT</option>
+                <option>Arquitecto Cloud</option>
+                <option>Maquetador</option>
+                <option>UX Designer</option>
+              </select>
+            </div>
+            <div id="election" class="btn-group" role="group" data-toggle="buttons">
+              <label class="btn btn-success">
+                <input type="radio" name="options" value="accept" autocomplete="off"> Aceptar
+              </label>
+              <label class="btn btn-warning">
+                <input type="radio" name="options" value="maybe" autocomplete="off"> Quizá
+              </label>
+              <label class="btn btn-danger">
+                <input type="radio" name="options" value="refuse" autocomplete="off"> Rechazar
+              </label>
+            </div>
+          </div>
+
+          <div class="card-body" id="step2" hidden>
+            <div class="form-group">
+              <label for="reason">Notas</label>
+              <input id="reason" class="form-control" type="text" value="">
+            </div>
+            <div lass="btn-group" role="group"></div>
+              <button class="btn btn-sm btn-success" id="accept">Aceptar</button>
+              <button class="btn btn-sm btn-danger" id="cancel">Cancelar</button>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- build:js scripts/popup-vendor.js -->
+    <!-- bower:js -->
+    <!-- endbower -->
     <script src="styles/js/jquery-3.2.1.min.js"></script>
     <script src="styles/js/popper.min.js"></script>
     <script src="styles/js/bootstrap.min.js"></script>
     <!-- endbuild -->
-  </head>
-  <body>
-    <h1>TalentoLearning</h1>
-
-    <select id="SelectorPuesto">
-      <option>Enterprise Architect</option>
-      <option>Arquitecto de Software</option>
-      <option>Arquitecto de Sistemas</option>
-      <option>Front-End</option>
-      <option>Back-End</option>
-      <option>DevOps Engineer</option>
-      <option>Mobile (iOS/Android) Engineer</option>
-      <option>Tester/QA Analyst</option>
-      <option>Data Architect</option>
-      <option>Data Scientist</option>
-      <option>Ingeniero QA</option>
-      <option>Arquitecto de Big Data</option>
-      <option>Ingeniero de Big Data</option>
-      <option>Experto IoT</option>
-      <option>Arquitecto Cloud</option>
-      <option>Maquetador</option>
-      <option>UX Designer</option>
-    </select>
-
-    <br><br>
-    <div id="Eleccion">
-      <button id="accept" class="botonMain" type="button" >Aceptado </button>
-      <button id="maybe" class="botonMain" type="button">Quizás</button>
-      <button id="refuse" class="botonMain" type="button">Rechazado</button>
-    </div>
-
-    <br>
-    <!-- build:js scripts/popup-vendor.js -->
-    <!-- bower:js -->
-    <!-- endbower -->
-    <!-- endbuild -->
-    <div id="formAccept" style="display: none">
-      <p id="Frase aceptar"></p>
-      <p>¿Por qué?</p>
-      <input id="RazonAceptado" style="border-radius: 5px" type="text" value="">
-      <br><br>
-      <button class="boton" id="AceptarAceptar">Aceptar</button>
-      <button class="boton" id="CancelarAceptar">Cancelar</button>
-    </div>
-
-    <div id="formMaybe" style="display: none">
-        <p id="Frase quizas"></p>
-        <p>¿Por qué?</p>
-        <input id="RazonNevera" style="border-radius: 5px" type="text" value="">
-        <br><br>
-        <button class="boton" id="AceptarQuizas">Aceptar</button>
-        <button class="boton" id="CancelarQuizas">Cancelar</button>
-    </div>
-
-    <div id="formCancel" style="display: none">
-        <p id="Frase cancelar"></p>
-        <p>¿Por qué?</p>
-        <input id="RazonRechazo" style="border-radius: 5px" type="text" value="">
-        <br><br>
-        <button class="boton" id="AceptarCancelar">Aceptar</button>
-        <button class="boton" id="CancelarCancelar">Cancelar</button>
-    </div>
-
     <!-- build:js scripts/popup.js -->
-    <script src="scripts.babel/content.js"></script>
-    <script src="scripts.babel/background.js"></script>
     <script src="scripts.babel/popup.js"></script>
 
     <!-- endbuild -->

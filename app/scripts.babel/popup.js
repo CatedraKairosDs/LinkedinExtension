@@ -1,101 +1,101 @@
 'use strict';
+(()=>{
+  console.log('Bienvenido al clasificador de Linkedin');
 
-console.log('Bienvenido al clasificador de Linkedin');
+  var selectorPuesto = document.getElementById('SelectorPuesto');
+  var sentence = document.getElementById('sentence');
+  var msgs = document.getElementById('msgs');
+  var reason = document.getElementById('reason');
 
-var selectorPuesto = document.getElementById("SelectorPuesto");
-//Botones generales
-var acceptButton = document.getElementById("accept");
-var maybeButton = document.getElementById("maybe");
-var refuseButton = document.getElementById("refuse");
-//Botones del formulario de aceptar
-var acceptAceptarButton;
-var cancelAceptarButton;
-//Botones del formulario de quizas
-var acceptQuizasButton;
-var cancelQuizasButton;
-//Botones del formulario de cancelar
-var acceptCancelarButton;
-var cancelCancelarButton;
-//Formularios
-var formAccept = document.getElementById("formAccept");
-var formMaybe = document.getElementById("formMaybe");
-var formCancel = document.getElementById("formCancel");
+  //Botones generales
+  var radioButtons = $('#election input[name=options]');
+  var accpetButton = document.getElementById('accept');
+  var cancelButton = document.getElementById('cancel');
+  //Formularios
+  var step1 = document.getElementById('step1');
+  var step2 = document.getElementById('step2');
 
-//Puesto seleccionado en el selector
-var puesto = selectorPuesto.options[selectorPuesto.selectedIndex].text;
+  var locale = {
+    accept: 'Aceptar',
+    maybe: 'Quizá',
+    refuse: 'Rechazar'
+  };
 
-//Listener de cambios en el selector y actualización del puesto
-selectorPuesto.addEventListener('change', function(event){
-  console.log("Ha cambiado");
-  puesto = selectorPuesto.options[selectorPuesto.selectedIndex].text;
-  console.log("Dentro: " + puesto);
-  formAccept.style="display: none";
-  formMaybe.style="display: none";
-  formCancel.style="display: none";
 
-});
+  function resetForm() {
+    sentence.innerHTML = 'Perfil';
+    var election = $('#election input[name=options]:checked');
+    election.prop('checked',false);
+    election.parent().removeClass('active');
+    step1.removeAttribute('hidden');
+    step2.setAttribute('hidden', '');
+    reason.value = '';
+  }
 
-//Listener del boton aceptar para sacar el formulario de aceptar
-acceptButton.addEventListener('click', function(){
-  formAccept.style="display: block";
-  formMaybe.style="display: none";
-  formCancel.style="display: none";
-  var frase = document.getElementById("Frase aceptar");
-  frase.innerHTML = "Estás aceptando un perfil de "+puesto.bold();
-  acceptAceptarButton = document.getElementById("AceptarAceptar");
-  cancelAceptarButton = document.getElementById("CancelarAceptar");
+  function showMessage(msg, type) {
+    msgs.innerHTML = msg;
+    msgs.removeAttribute('hidden');
+    msgs.classList.add('alert-' + type);
+    var timeout = setTimeout(() => {
+      clearTimeout(timeout);
+      msgs.setAttribute('hidden', '');
+    }, 5000)
+  }
 
-  //Listeners del formulario de acepar
-  acceptAceptarButton.addEventListener('click', function() {
-    formAccept.style="display: none";
+  //Listener del boton aceptar para sacar el formulario de aceptar
+  radioButtons.change(function(){
+    step1.setAttribute('hidden', '');
+    step2.removeAttribute('hidden');
+    //Puesto seleccionado en el selector
+    var puesto = selectorPuesto.value;
+    var election = $('#election input[name=options]:checked').val();
+    sentence.innerHTML = `${locale[election]} ${puesto.bold()}`;
+
+    //Listeners del formulario de acepar
+    accpetButton.addEventListener('click', function() {
+      step1.setAttribute('hidden', '');
+    });
+
+    cancelButton.addEventListener('click', resetForm);
   });
 
-  cancelAceptarButton.addEventListener('click', function() {
-    document.getElementById("RazonAceptado").value = "";
-    formAccept.style="display: none";
+  function sendData(label, puesto, url) {
+    console.log('Se pulsa!!')
+    var comentario = document.querySelector('#reason').value;
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, {sendAll: 'yes'}, function handler(response) {
+        if (response) {
+          var data = new FormData();
+          //console.log(response);
+          response.label = String(label);
+          response.puesto = String(puesto);
+          response.comment = String(comentario);
+          data.set('json', JSON.stringify(response));
+          //console.log(data);
+          //console.log(data.get('json'));
+          fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(response)
+          }).then(function(r){
+            showMessage('Perfil guardado correctamente', 'success');
+          }).catch(function(err){
+            showMessage('Ha ocurrido un error, vuelve a intentarlo.', 'danger');
+          });
+          resetForm();
+        } else {
+          showMessage('No se ha podido obtener datos. ¿Estás en Linkedin Recruiter?', 'info');
+        }
+      });
+    });     
+  }
+  
+  $('#accept').click(()  => {
+    var puesto = selectorPuesto.value;
+    var election = $('#election input[name=options]:checked').val();
+    console.log('Se pulsa en ' + election);
+    //Las url no son definitivas
+    sendData(election, puesto, 'https://34.248.142.102/api-linkedin/v1/profiles');
   });
-});
-
-//Listener del boton de quizas para sacar el formulario de quizas
-maybeButton.addEventListener('click', function(event){
-  formMaybe.style="display: block";
-  formAccept.style="display: none";
-  formCancel.style="display: none";
-  var frase = document.getElementById("Frase quizas");
-  frase.innerHTML = 'Estás "metiendo en la nevera" un perfil de '+puesto.bold();
-  acceptQuizasButton = document.getElementById("AceptarQuizas");
-  cancelQuizasButton = document.getElementById("CancelarQuizas");
-  //Listeners del formulario de quizas
-  acceptQuizasButton.addEventListener('click', function() {
-    formMaybe.style="display: none";
-  });
-
-  cancelQuizasButton.addEventListener('click', function() {
-    document.getElementById("RazonNevera").value = "";
-    formMaybe.style="display: none";
-  });
-});
-
-//Listener del boton de cancelar para sacar el formulario de cancelar
-refuseButton.addEventListener('click', function(event){
-  formCancel.style="display: block";
-  formAccept.style="display: none";
-  formMaybe.style="display: none";
-  var frase = document.getElementById("Frase cancelar");
-  frase.innerHTML = "Estás rechazando un perfil de "+puesto.bold();
-  acceptCancelarButton = document.getElementById("AceptarCancelar");
-  cancelCancelarButton = document.getElementById("CancelarCancelar");
-  //Listeners del formulario de cancelar
-  acceptCancelarButton.addEventListener('click', function() {
-    formCancel.style="display: none";
-  });
-
-  cancelCancelarButton.addEventListener('click', function() {
-    document.getElementById("RazonRechazo").value = "";
-    formCancel.style="display: none";
-  });
-
-});
-
-
-
+  
+})();
