@@ -41,7 +41,6 @@
       msgs.setAttribute('hidden', '');
     }, 5000)
   }
-
   //Listener del boton aceptar para sacar el formulario de aceptar
   radioButtons.change(function(){
     step1.setAttribute('hidden', '');
@@ -64,9 +63,12 @@
     var comentario = document.querySelector('#reason').value;
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {sendAll: 'yes'}, function handler(response) {
+        var linkedinId = tabs[0].url.split('/')[5].split(',')[0];
+        //console.log(linkedinId);
         if (response) {
           var data = new FormData();
           //console.log(response);
+          response.linkedinId = linkedinId;
           response.label = String(label);
           response.puesto = String(puesto);
           response.comment = String(comentario);
