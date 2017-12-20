@@ -1,23 +1,23 @@
 {
   "manifest_version": 2,
 
-  "name": "Linkedin Extension",
+  "name": "Kairós Talento Learing",
   "description": "This extension allows the user to change the background color of the current page.",
-  "version": "1.0",
+  "version": "1.0.1",
 
   "browser_action": {
-    "default_icon": "images/linkedin.png",
+    "default_icon": "images/icon.png",
     "default_popup": "popup.html",
-    "default_title": "Linkedin Classifier!"
+    "default_title": "Kairós Talento Learing"
   },
   "default_locale": "en",
   "background": {
-    "scripts": ["styles/js/jquery-3.2.1.min.js","scripts.babel/background.js"]
+    "scripts": ["scripts.babel/background.js"]
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["styles/js/jquery-3.2.1.min.js","scripts.babel/content.js"]
+      "js": ["scripts.babel/content.js"]
     }
   ],
   "permissions": [

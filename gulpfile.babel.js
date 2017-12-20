@@ -54,7 +54,7 @@ gulp.task('html',  () => {
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.sourcemaps.init())
-    .pipe($.if('*.js', $.uglify()))
+    //.pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
     .pipe($.sourcemaps.write())
     .pipe($.if('*.html', $.htmlmin({
@@ -68,18 +68,18 @@ gulp.task('html',  () => {
 
 gulp.task('chromeManifest', () => {
   return gulp.src('app/manifest.json')
-    .pipe($.chromeManifest({
-      buildnumber: true,
-      background: {
-        target: 'scripts/background.js',
-        exclude: [
-          'scripts/chromereload.js'
-        ]
-      }
+  .pipe($.chromeManifest({
+    buildnumber: true,
+    background: {
+      target: 'scripts/background.js',
+      exclude: [
+        'scripts/chromereload.js'
+      ]
+    }
   }))
   .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
   .pipe($.if('*.js', $.sourcemaps.init()))
-  .pipe($.if('*.js', $.uglify()))
+  // .pipe($.if('*.js', $.uglify()))
   .pipe($.if('*.js', $.sourcemaps.write('.')))
   .pipe(gulp.dest('dist'));
 });
@@ -124,7 +124,7 @@ gulp.task('wiredep', () => {
 gulp.task('package', function () {
   var manifest = require('./dist/manifest.json');
   return gulp.src('dist/**')
-      .pipe($.zip('talentoLearningExtension-' + manifest.version + '.zip'))
+      .pipe($.zip('kairosTalentoLearningExtension-' + manifest.version + '.zip'))
       .pipe(gulp.dest('package'));
 });
 
