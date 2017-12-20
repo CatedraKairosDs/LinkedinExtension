@@ -24,7 +24,17 @@
         <div id="msgs" hidden class="alert" role="alert"></div>
         <div class="card">
           <div id="sentence" class="card-header" role="tab">Perfil</div>
-          <div class="card-body" id="step1">
+          <div class="card-body" id="optionStep">
+            <div id="firstElection">
+              <label class="btn">
+                  <input type="radio" name="firstOptions" value="info" autocomplete="off"> Información de la búsqueda
+              </label>
+              <label class="btn">
+                  <input type="radio" name="firstOptions" value="save" autocomplete="off"> Guardar perfiles
+              </label>
+            </div>
+          </div>
+          <div class="card-body" id="step1" hidden>
             <div class="form-group">
               <label for="SelectorPuesto">Tipo</label>
               <select id="SelectorPuesto" class="form-control">

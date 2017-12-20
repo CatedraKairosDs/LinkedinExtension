@@ -11,9 +11,11 @@
   var radioButtons = $('#election input[name=options]');
   var accpetButton = document.getElementById('accept');
   var cancelButton = document.getElementById('cancel');
+  var firstRadioButtons = $('#firstElection input[name=firstOptions]');
   //Formularios
   var step1 = document.getElementById('step1');
   var step2 = document.getElementById('step2');
+  var optionStep = document.getElementById('optionStep');
 
   var locale = {
     accept: 'Aceptar',
@@ -25,9 +27,12 @@
   function resetForm() {
     sentence.innerHTML = 'Perfil';
     var election = $('#election input[name=options]:checked');
+    var firstElection = $('#firstElection input[name=firstOptions]:checked');
     election.prop('checked',false);
     election.parent().removeClass('active');
-    step1.removeAttribute('hidden');
+    firstElection.prop('checked', false);
+    firstElection.parent().removeClass('active');
+    step1.setAttribute('hidden', '');
     step2.setAttribute('hidden', '');
     reason.value = '';
   }
@@ -41,6 +46,18 @@
       msgs.setAttribute('hidden', '');
     }, 5000)
   }
+  firstRadioButtons.change(function(){
+    var firstElection = $('#firstElection input[name=firstOptions]:checked').val();
+    if (firstElection === "info") {
+      step1.setAttribute('hidden', '');
+      getIds();
+      //Mostrar info en la página ¿y un OK para volver?
+    } else if (firstElection === "save") {
+      step1.removeAttribute('hidden');
+      //Mostrar step1 y demás
+    }
+    console.log(firstElection);
+  })
   //Listener del boton aceptar para sacar el formulario de aceptar
   radioButtons.change(function(){
     step1.setAttribute('hidden', '');
@@ -57,6 +74,16 @@
 
     cancelButton.addEventListener('click', resetForm);
   });
+
+  function getIds(){
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, {sendAll: 'ids'}, function getterHandler(response){
+        if (response) {
+          console.log(response);
+        }
+      })
+    })
+  }
 
   function sendData(label, puesto, url) {
     console.log('Se pulsa!!')
