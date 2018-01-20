@@ -348,8 +348,12 @@ chrome.runtime.onMessage.addListener(
             for (var i = 0; i < searchedProfiles.length; i++){
                 var linkedinId = searchedProfiles[i].id.split('-')[2];
                 if (linkedinId !== "undefined") {
-                    console.log(linkedinId);
-                    ids.push(linkedinId);
+                    var lId = searchedProfiles[i].childNodes[0].getAttribute('data-pid');
+                    if (lId === null) {
+                        ids.push(linkedinId);
+                    } else {
+                        ids.push(lId);
+                    }
                 }
             }
             sendResponse(ids);
@@ -360,8 +364,15 @@ chrome.runtime.onMessage.addListener(
             var ids = [];
             for (var i = 0; i < searchedProfiles.length; i++) {
                 var profile = searchedProfiles[i];
-                var linkedinId = profile.id.split('-')[2];
+                var linkedinId = "";
+                if (profile.childNodes[0].getAttribute('data-pid') !== null) {
+                    linkedinId = profile.childNodes[0].getAttribute('data-pid');
+                } else {
+                    linkedinId = profile.id.split('-')[2];
+                }
                 if (linkedinId !== "undefined") {
+                    var spaceNode = document.createElement('div');
+                    profile.appendChild(spaceNode);
                     if (request.info[linkedinId].profile.length === 0) {
                         var message = "INFO: No se ha guardado antes";
                         var messageNode = document.createTextNode(message);
@@ -371,13 +382,21 @@ chrome.runtime.onMessage.addListener(
                         for (var j = 0; j < request.info[linkedinId].profile.length; j++) {
                             var comment = request.info[linkedinId].profile[j].comment;
                             var label = request.info[linkedinId].profile[j].label;
+                            var labelMessage = "";
+                            if (label === "accept") {
+                                labelMessage = "Perfil ACEPTADO";
+                            } else if (label === "maybe") {
+                                labelMessage = "Perfil EN LA NEVERA";
+                            } else if (label === "refuse") {
+                                labelMessage = "Perfil RECHAZADO";
+                            }
                             var job = request.info[linkedinId].profile[j].puesto;
-                            var message = "INFO: Perfil etiquetado como "+label+" para el puesto "+job+". Comentario: "+comment+"\n";
+                            var message = "INFO: "+labelMessage+" para el puesto "+job+". Comentario: "+comment;
                             var messageNode = document.createTextNode(message);
                             var node = document.createElement('div');
                             profile.appendChild(node.appendChild(messageNode));
-                            var nodeAux = document.createElement('div');
-                            profile.appendChild(nodeAux);
+                            var returnNode = document.createElement('div');
+                            profile.appendChild(returnNode);
                             if (request.info[linkedinId].profile.length > 1) {
                                 profile.setAttribute("style", "background-color: #61AEEE");
                             } else {
