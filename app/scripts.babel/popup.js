@@ -17,6 +17,8 @@
   var step2 = document.getElementById('step2');
   var optionStep = document.getElementById('optionStep');
 
+  //
+
   var locale = {
     accept: 'Aceptar',
     maybe: 'Quizá',
@@ -34,6 +36,7 @@
     firstElection.parent().removeClass('active');
     step1.setAttribute('hidden', '');
     step2.setAttribute('hidden', '');
+    document.getElementById('optionStepMessage').setAttribute('hidden', '');
     reason.value = '';
   }
 
@@ -50,9 +53,10 @@
     var firstElection = $('#firstElection input[name=firstOptions]:checked').val();
     if (firstElection === "info") {
       step1.setAttribute('hidden', '');
-      getIds();
+      getIds()
       //Mostrar info en la página ¿y un OK para volver?
     } else if (firstElection === "save") {
+      document.getElementById('optionStepMessage').setAttribute('hidden', '');
       step1.removeAttribute('hidden');
       //Mostrar step1 y demás
     }
@@ -76,13 +80,58 @@
   });
 
   function getIds(){
+    var respuesta = {};
+    var perfiles = "";
+    var data = [];
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {sendAll: 'ids'}, function getterHandler(response){
         if (response) {
-          console.log(response);
+          //console.log(response);
+          var url = "";
+          for (var i = 0; i<response.length; i++) {
+            url = "https://34.248.142.102/api-linkedin/v1/profiles/idLinkedin/"+response[i];
+            searchProfile(url, respuesta, response, i);
+          }
         }
       })
     })
+  }
+
+  function searchProfile(url, respuesta, response, i) {
+    fetch(url, {
+      method: 'GET'
+    }).then(function(r){
+      r.json().then(function(rjson) {
+        var key = String(response[i]);
+        respuesta[key] = rjson;
+        return respuesta;
+        }).then(function(res){
+          if (response.length === Object.keys(res).length) {
+            presentData(res);
+          }
+      })
+    }).catch(function(err) {
+      console.log(err);
+    })
+  }
+
+  function presentData(profiles) {
+    console.log('Presentar datos');
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+      console.log("Perfiles: ", profiles);
+      var profileAux = {
+        "12345" : {
+          "profile": [{"1": "uno"}, {"2": "dos"}]
+        }
+      };
+      console.log("Se mandan los datos ahora");
+      chrome.tabs.sendMessage(tabs[0].id, {sendAll: 'requestedInfo', info: profiles}, function handler(response) {
+        if (response) {
+          document.getElementById('optionStepMessage').removeAttribute('hidden');
+        }
+      })
+    })
+    console.log(profiles);
   }
 
   function sendData(label, puesto, url) {
