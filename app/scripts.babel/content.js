@@ -4,7 +4,7 @@
         // Call the specified callback, passing
         // the web-page's DOM content as argument
         sendResponse(document.body);
-        console.log("Content: Envía mensaje");
+        console.log('Content: Envía mensaje');
     }
 });
 */
@@ -16,7 +16,7 @@ chrome.runtime.onMessage.addListener(
             sendResponse(null);
             return;
         }
-        if (request.sendAll === "yes") {
+        if (request.sendAll === 'yes') {
             //General
             var name = document.getElementsByClassName('profile-info')[0].childNodes[0].innerText;
             var extract = '';
@@ -341,13 +341,13 @@ chrome.runtime.onMessage.addListener(
             //var profile = [name, actualJob, actualCompany, location, connections, experience, skills];
             sendResponse(jsonProfile);
             //sendResponse(profile); //profile-content
-        } else if (request.sendAll === "ids") {
-            console.log("Info de búsqueda");
+        } else if (request.sendAll === 'ids') {
+            console.log('Info de búsqueda');
             var searchedProfiles = document.getElementById('search-results').childNodes;
             var ids = [];
             for (var i = 0; i < searchedProfiles.length; i++){
                 var linkedinId = searchedProfiles[i].id.split('-')[2];
-                if (linkedinId !== "undefined") {
+                if (linkedinId !== 'undefined') {
                     var lId = searchedProfiles[i].childNodes[0].getAttribute('data-pid');
                     if (lId === null) {
                         ids.push(linkedinId);
@@ -364,17 +364,17 @@ chrome.runtime.onMessage.addListener(
             var ids = [];
             for (var i = 0; i < searchedProfiles.length; i++) {
                 var profile = searchedProfiles[i];
-                var linkedinId = "";
+                var linkedinId = '';
                 if (profile.childNodes[0].getAttribute('data-pid') !== null) {
                     linkedinId = profile.childNodes[0].getAttribute('data-pid');
                 } else {
                     linkedinId = profile.id.split('-')[2];
                 }
-                if (linkedinId !== "undefined") {
+                if (linkedinId !== 'undefined') {
                     var spaceNode = document.createElement('div');
                     profile.appendChild(spaceNode);
                     if (request.info[linkedinId].profile.length === 0) {
-                        var message = "INFO: No se ha guardado antes";
+                        var message = 'INFO: No se ha guardado antes';
                         var messageNode = document.createTextNode(message);
                         var node = document.createElement('div');
                         profile.appendChild(node.appendChild(messageNode));
@@ -382,33 +382,33 @@ chrome.runtime.onMessage.addListener(
                         for (var j = 0; j < request.info[linkedinId].profile.length; j++) {
                             var comment = request.info[linkedinId].profile[j].comment;
                             var label = request.info[linkedinId].profile[j].label;
-                            var labelMessage = "";
-                            if (label === "accept") {
-                                labelMessage = "Perfil ACEPTADO";
-                            } else if (label === "maybe") {
-                                labelMessage = "Perfil EN LA NEVERA";
-                            } else if (label === "refuse") {
-                                labelMessage = "Perfil RECHAZADO";
+                            var labelMessage = '';
+                            if (label === 'accept') {
+                                labelMessage = 'Perfil ACEPTADO';
+                            } else if (label === 'maybe') {
+                                labelMessage = 'Perfil EN LA NEVERA';
+                            } else if (label === 'refuse') {
+                                labelMessage = 'Perfil RECHAZADO';
                             }
                             var job = request.info[linkedinId].profile[j].puesto;
-                            var message = "INFO: "+labelMessage+" para el puesto "+job+". Comentario: "+comment;
+                            var message = `INFO ${labelMessage} para el puesto ${job}. Comentario: ${comment}`;
                             var messageNode = document.createTextNode(message);
                             var node = document.createElement('div');
                             profile.appendChild(node.appendChild(messageNode));
                             var returnNode = document.createElement('div');
                             profile.appendChild(returnNode);
                             if (request.info[linkedinId].profile.length > 1) {
-                                profile.setAttribute("style", "background-color: #61AEEE");
+                                profile.setAttribute('style', 'background-color: #61AEEE');
                             } else {
                                 switch (label) {
                                     case 'accept':
-                                        profile.setAttribute("style", "background-color: #61EE7F");
+                                        profile.setAttribute('style', 'background-color: #61EE7F');
                                         break;
                                     case 'maybe':
-                                        profile.setAttribute("style", "background-color: #FAFF69");
+                                        profile.setAttribute('style', 'background-color: #FAFF69');
                                         break;
                                     case 'refuse':
-                                        profile.setAttribute("style", "background-color: #F84A45");
+                                        profile.setAttribute('style', 'background-color: #F84A45');
                                         break;
                                 }
                             }
@@ -417,7 +417,7 @@ chrome.runtime.onMessage.addListener(
                         // var comment = request.info[linkedinId].profile[0].comment;
                         // var label = request.info[linkedinId].profile[0].label;
                         // var job = request.info[linkedinId].profile[0].puesto;
-                        // message = "INFO: Perfil etiquetado como "+label+" para el puesto "+job+". Comentario: "+comment;
+                        // message = 'INFO: Perfil etiquetado como '+label+' para el puesto '+job+'. Comentario: '+comment;
                     }
                     // var messageNode = document.createTextNode(message);
                     // profile.appendChild(node.appendChild(messageNode));
